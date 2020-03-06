@@ -11,7 +11,7 @@ path_t = 'Training_data'
 path_v = 'Validation_data'
 
 EPOCH_NUMBER = 3
-#BATCH_SIZE = 32
+BATCH_SIZE = 32
 
 #We build the dataset.
 datagen = keras.preprocessing.image.ImageDataGenerator(shear_range = 0.2,
@@ -24,8 +24,8 @@ datagen = keras.preprocessing.image.ImageDataGenerator(shear_range = 0.2,
                                                        fill_mode='reflect',
                                                        data_format='channels_last',
                                                        brightness_range=[0.5, 1.5])
-train_set = datagen.flow_from_directory(path_t, class_mode = 'binary', batch_size = 32)
-validation_set = datagen.flow_from_directory(path_v, class_mode = 'binary', batch_size = 32)
+train_set = datagen.flow_from_directory(path_t, class_mode = 'binary', batch_size = BATCH_SIZE)
+validation_set = datagen.flow_from_directory(path_v, class_mode = 'binary', batch_size = BATCH_SIZE)
 
 #We build the model.
 model = keras.Sequential()
