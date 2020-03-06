@@ -50,7 +50,7 @@ model.add(layer.Dense(1, activation = 'sigmoid'))
 
 model.compile(optimizer='adam',loss=keras.losses.binary_crossentropy, metrics=['accuracy'])
 
-history = model.fit_generator(train_set, verbose = 1, epochs = EPOCH_NUMBER, validation_data = validation_set)
+history = model.fit_generator(train_set, verbose = 1, epochs = EPOCH_NUMBER, validation_data = validation_set, steps_per_epoch = len(train_set))
 #score = model.evaluate_generator(validation_set)
 #print('Test loss:', score[0])
 #print('Test acc:', score[1])
