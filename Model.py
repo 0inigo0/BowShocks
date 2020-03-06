@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 import tensorflow.keras.layers as layer
 
 #GLOBAL VARIABLES
-path_t = '~/Training_data'
-path_v = '~/Validation_data'
+path_t = '/home/ubuntu/Training_data'
+path_v = '/home/ubuntu/Validation_data'
 
 EPOCH_NUMBER = 3
 BATCH_SIZE = 32
