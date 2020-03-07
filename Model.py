@@ -10,7 +10,7 @@ import tensorflow.keras.layers as layer
 path_t = '/home/ubuntu/Training_data'
 path_v = '/home/ubuntu/Validation_data'
 
-EPOCH_NUMBER = 3
+EPOCH_NUMBER = 20
 BATCH_SIZE = 32
 
 #We build the dataset.
