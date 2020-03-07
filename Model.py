@@ -12,6 +12,7 @@ path_v = '/home/ubuntu/Validation_data'
 
 EPOCH_NUMBER = 20
 BATCH_SIZE = 32
+LEARNING_RATE = 0.001 # its 0.01 by default if we just specify 'adam'.
 
 #We build the dataset.
 datagen = keras.preprocessing.image.ImageDataGenerator(shear_range = 0.2,
@@ -46,9 +47,12 @@ model.add(layer.Dense(64, activation = 'relu'))
 model.add(layer.Dense(32, activation = 'relu'))
 model.add(layer.Dense(1, activation = 'sigmoid'))
 
+
+#Create the optimizer: we are using adam.
+optimizer = keras.optimizers.Adam(learning_rate=LEARNING_RATE, beta_1=0.9, beta_2=0.999, amsgrad=False)
 # Run the model
 
-model.compile(optimizer='adam',loss=keras.losses.binary_crossentropy, metrics=['accuracy'])
+model.compile(optimizer = optimizer,loss=keras.losses.binary_crossentropy, metrics=['accuracy'])
 
 history = model.fit_generator(train_set, verbose = 1, epochs = EPOCH_NUMBER, validation_data = validation_set)
 #score = model.evaluate_generator(validation_set)
