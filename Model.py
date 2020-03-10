@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow.keras.layers as layer
+from tensorflow.keras.models import model_from_json
 
 #GLOBAL VARIABLES
 path_t = '/home/ubuntu/Training_data'
@@ -25,7 +26,8 @@ datagen = keras.preprocessing.image.ImageDataGenerator(shear_range = 0.2,
                                                        fill_mode='reflect',
                                                        data_format='channels_last',
                                                        brightness_range=[0.5, 1.5],
-                                                       rescale=1.0/255.0)
+                                                       featurewise_center=True, 
+                                                       featurewise_std_normalization=True)
 train_set = datagen.flow_from_directory(path_t, class_mode = 'binary', batch_size = BATCH_SIZE)
 validation_set = datagen.flow_from_directory(path_v, class_mode = 'binary', batch_size = BATCH_SIZE)
 
@@ -65,6 +67,14 @@ history = model.fit_generator(train_set, verbose = 1, epochs = EPOCH_NUMBER, val
 #print('Test loss:', score[0])
 #print('Test acc:', score[1])
 
+'''Save Model to h5 '''
+model_json = model.to_json()
+with open("model.json", "w") as json_file:
+    json_file.write(model_json)
+# serialize weights to HDF5
+model.save_weights("model_1.h5")
+print("Saved model to disk")
+
 # Plot training & validation accuracy values|| Borrowed from keras documentation.
 plt.plot(history.history['acc'])
 plt.plot(history.history['val_acc'])
@@ -82,3 +92,5 @@ plt.ylabel('Loss')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
 plt.savefig("Loss.png")
+
+
