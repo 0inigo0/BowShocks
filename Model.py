@@ -54,7 +54,7 @@ model.add(layer.Dense(1, activation = 'sigmoid'))
 
 
 #Create the optimizer: we are using adam.
-optimizer = keras.optimizers.Adam(learning_rate=LEARNING_RATE, beta_1=0.9, beta_2=0.999, amsgrad=False)
+optimizer = keras.optimizers.Adam(learning_rate = LEARNING_RATE, beta_1 = 0.9, beta_2 = 0.999, amsgrad=False)
 # Run the model
 
 model.compile(optimizer = optimizer,loss=keras.losses.binary_crossentropy, metrics=['accuracy'])
