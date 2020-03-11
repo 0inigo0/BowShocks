@@ -11,7 +11,7 @@ from tensorflow.keras.models import model_from_json
 path_t = '/home/ubuntu/Training_data'
 path_v = '/home/ubuntu/Validation_data'
 
-EPOCH_NUMBER = 20
+EPOCH_NUMBER = 50
 BATCH_SIZE = 32
 LEARNING_RATE = 0.001 # its 0.01 by default if we just specify 'adam'.
 
@@ -47,6 +47,7 @@ model.add(layer.MaxPooling2D(pool_size = (2,2)))
 model.add(layer.Conv2D(64, kernel_size = (3,3), activation = 'relu'))
 model.add(layer.Conv2D(128, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
 model.add(layer.Conv2D(256, kernel_size = (3,3), activation = 'relu'))
+model.add(layer.Conv2D(320, kernel_size = (3,3), activation = 'relu'))
 model.add(layer.MaxPooling2D(pool_size = (2,2)))
 
 model.add(layer.Flatten())
