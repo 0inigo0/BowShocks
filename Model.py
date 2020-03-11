@@ -53,25 +53,25 @@ model.add(layer.Dense(128, activation = 'relu'))
 #model.add(Dropout(0.25)) #different interpretation
 model.add(layer.Dense(32, activation = 'relu'))
 '''
-model.add(layer.Conv2D(32, kernel_size = (3,3), activation = 'relu'))
-model.add(layer.Conv2D(32, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
-model.add(layer.Conv2D(32, kernel_size = (3,3), activation = 'relu'))
+model.add(layer.Conv2D(8, kernel_size = (3,3), activation = 'relu'))
+model.add(layer.Conv2D(16, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
+model.add(layer.Conv2D(24, kernel_size = (3,3), activation = 'relu'))
 model.add(layer.MaxPooling2D(pool_size = (2,2)))
 #model.add(Dropout(0.25)) #different interpretation
-model.add(layer.Conv2D(64, kernel_size = (3,3), activation = 'relu'))
-model.add(layer.Conv2D(64, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
+model.add(layer.Conv2D(32, kernel_size = (3,3), activation = 'relu'))
+model.add(layer.Conv2D(48, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
 model.add(layer.Conv2D(64, kernel_size = (3,3), activation = 'relu'))
 model.add(layer.MaxPooling2D(pool_size = (2,2)))
 
-model.add(layer.Conv2D(128, kernel_size = (3,3), activation = 'relu'))
+model.add(layer.Conv2D(96, kernel_size = (3,3), activation = 'relu'))
 model.add(layer.Conv2D(128, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
-model.add(layer.Conv2D(128, kernel_size = (3,3), activation = 'relu'))
+model.add(layer.Conv2D(256, kernel_size = (3,3), activation = 'relu'))
 model.add(layer.MaxPooling2D(pool_size = (2,2)))
 
 model.add(layer.Flatten())
-model.add(layer.Dense(512, activation = 'relu'))
+model.add(layer.Dense(256, activation = 'relu'))
 #model.add(Dropout(0.25)) #different interpretation
-model.add(layer.Dense(64, activation = 'relu'))
+model.add(layer.Dense(32, activation = 'relu'))
 model.add(layer.Dense(1, activation = 'sigmoid'))
 
 
