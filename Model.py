@@ -31,7 +31,7 @@ validation_set = datagen.flow_from_directory(path_v, class_mode = 'binary', batc
 
 #We build the model.
 model = keras.Sequential()
-
+'''
 model.add(layer.Conv2D(3, kernel_size = (3,3), activation = 'relu'))
 model.add(layer.Conv2D(6, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
 model.add(layer.Conv2D(12, kernel_size = (3,3), activation = 'relu'))
@@ -52,6 +52,27 @@ model.add(layer.Flatten())
 model.add(layer.Dense(128, activation = 'relu'))
 #model.add(Dropout(0.25)) #different interpretation
 model.add(layer.Dense(32, activation = 'relu'))
+'''
+model.add(layer.Conv2D(32, kernel_size = (3,3), activation = 'relu'))
+model.add(layer.Conv2D(32, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
+model.add(layer.Conv2D(32, kernel_size = (3,3), activation = 'relu'))
+model.add(layer.MaxPooling2D(pool_size = (2,2)))
+#model.add(Dropout(0.25)) #different interpretation
+model.add(layer.Conv2D(64, kernel_size = (3,3), activation = 'relu'))
+model.add(layer.Conv2D(64, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
+model.add(layer.Conv2D(64, kernel_size = (3,3), activation = 'relu'))
+model.add(layer.MaxPooling2D(pool_size = (2,2)))
+
+model.add(layer.Conv2D(128, kernel_size = (3,3), activation = 'relu'))
+model.add(layer.Conv2D(128, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
+model.add(layer.Conv2D(128, kernel_size = (3,3), activation = 'relu'))
+model.add(layer.Conv2D(320, kernel_size = (3,3), activation = 'relu'))
+model.add(layer.MaxPooling2D(pool_size = (2,2)))
+
+model.add(layer.Flatten())
+model.add(layer.Dense(512, activation = 'relu'))
+#model.add(Dropout(0.25)) #different interpretation
+model.add(layer.Dense(64, activation = 'relu'))
 model.add(layer.Dense(1, activation = 'sigmoid'))
 
 
