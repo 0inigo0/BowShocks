@@ -11,9 +11,9 @@ from tensorflow.keras.models import model_from_json
 path_t = '/home/ubuntu/Training_data'
 path_v = '/home/ubuntu/Validation_data'
 
-EPOCH_NUMBER = 50
-BATCH_SIZE = 32
-LEARNING_RATE = 0.001 # its 0.01 by default if we just specify 'adam'.
+EPOCH_NUMBER = 100
+BATCH_SIZE = 64
+LEARNING_RATE = 0.0005 # its 0.01 by default if we just specify 'adam'.
 
 #We build the dataset.
 datagen = keras.preprocessing.image.ImageDataGenerator(shear_range = 0.2,
@@ -32,9 +32,9 @@ validation_set = datagen.flow_from_directory(path_v, class_mode = 'binary', batc
 #We build the model.
 model = keras.Sequential()
 '''
-model.add(layer.Conv2D(3, kernel_size = (3,3), activation = 'relu'))
-model.add(layer.Conv2D(6, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
-model.add(layer.Conv2D(12, kernel_size = (3,3), activation = 'relu'))
+model.add(layer.Conv2D(3, kernel_size = (5,5), activation = 'relu'))
+model.add(layer.Conv2D(6, kernel_size = (5,5), activation = 'relu')) #it knows what input shape is
+model.add(layer.Conv2D(12, kernel_size = (5,5), activation = 'relu'))
 model.add(layer.MaxPooling2D(pool_size = (2,2)))
 #model.add(Dropout(0.25)) #different interpretation
 model.add(layer.Conv2D(24, kernel_size = (3,3), activation = 'relu'))
