@@ -25,9 +25,7 @@ datagen = keras.preprocessing.image.ImageDataGenerator(shear_range = 0.2,
                                                        vertical_flip=True,
                                                        fill_mode='reflect',
                                                        data_format='channels_last',
-                                                       brightness_range=[0.5, 1.5],
-                                                       featurewise_center=True, 
-                                                       featurewise_std_normalization=True)
+                                                       brightness_range=[0.5, 1.5])
 train_set = datagen.flow_from_directory(path_t, class_mode = 'binary', batch_size = BATCH_SIZE)
 validation_set = datagen.flow_from_directory(path_v, class_mode = 'binary', batch_size = BATCH_SIZE)
 
