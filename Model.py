@@ -31,33 +31,12 @@ validation_set = datagen.flow_from_directory(path_v, class_mode = 'binary', batc
 
 #We build the model.
 model = keras.Sequential()
-'''
-model.add(layer.Conv2D(3, kernel_size = (5,5), activation = 'relu'))
-model.add(layer.Conv2D(6, kernel_size = (5,5), activation = 'relu')) #it knows what input shape is
-model.add(layer.Conv2D(12, kernel_size = (5,5), activation = 'relu'))
-model.add(layer.MaxPooling2D(pool_size = (2,2)))
-#model.add(Dropout(0.25)) #different interpretation
-model.add(layer.Conv2D(24, kernel_size = (3,3), activation = 'relu'))
-model.add(layer.Conv2D(36, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
-model.add(layer.Conv2D(48, kernel_size = (3,3), activation = 'relu'))
-model.add(layer.MaxPooling2D(pool_size = (2,2)))
 
-model.add(layer.Conv2D(64, kernel_size = (3,3), activation = 'relu'))
-model.add(layer.Conv2D(128, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
-model.add(layer.Conv2D(256, kernel_size = (3,3), activation = 'relu'))
-model.add(layer.Conv2D(320, kernel_size = (3,3), activation = 'relu'))
-model.add(layer.MaxPooling2D(pool_size = (2,2)))
-
-model.add(layer.Flatten())
-model.add(layer.Dense(128, activation = 'relu'))
-#model.add(Dropout(0.25)) #different interpretation
-model.add(layer.Dense(32, activation = 'relu'))
-'''
 model.add(layer.Conv2D(8, kernel_size = (3,3), activation = 'relu'))
 model.add(layer.Conv2D(16, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
 model.add(layer.Conv2D(24, kernel_size = (3,3), activation = 'relu'))
 model.add(layer.MaxPooling2D(pool_size = (2,2)))
-#model.add(Dropout(0.25)) #different interpretation
+
 model.add(layer.Conv2D(32, kernel_size = (3,3), activation = 'relu'))
 model.add(layer.Conv2D(48, kernel_size = (3,3), activation = 'relu')) #it knows what input shape is
 model.add(layer.Conv2D(64, kernel_size = (3,3), activation = 'relu'))
@@ -70,7 +49,7 @@ model.add(layer.MaxPooling2D(pool_size = (2,2)))
 
 model.add(layer.Flatten())
 model.add(layer.Dense(256, activation = 'relu'))
-#model.add(Dropout(0.25)) #different interpretation
+
 model.add(layer.Dense(32, activation = 'relu'))
 model.add(layer.Dense(1, activation = 'sigmoid'))
 
@@ -82,9 +61,6 @@ optimizer = keras.optimizers.Adam(learning_rate = LEARNING_RATE, beta_1 = 0.9, b
 model.compile(optimizer = optimizer,loss=keras.losses.binary_crossentropy, metrics=['accuracy'])
 
 history = model.fit_generator(train_set, verbose = 1, epochs = EPOCH_NUMBER, validation_data = validation_set)
-#score = model.evaluate_generator(validation_set)
-#print('Test loss:', score[0])
-#print('Test acc:', score[1])
 
 '''Save Model to h5 '''
 model_json = model.to_json()
