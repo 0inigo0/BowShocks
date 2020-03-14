@@ -1,29 +1,33 @@
 import tensorflow as tf
 from tensorflow import keras
+from keras.initializers import glorot_uniform
 from keras.models import load_model
+from keras.models import model_from_json
+import json
 from keras.preprocessing import image
-# load and prepare an image
-def load_image_pixels(filename, shape):
-    # load the image to get its shape
-    image1 = image.load_img(filename)
-    width, height = image.size
-    # load the image with the required size
-    image1 = image.load_img(filename, target_size=shape)
-    # convert to numpy array
-    image1 = image.img_to_array(image1)
-    # scale pixel values to [0, 1]
-    image1 = image1.astype('float32')
-    image1 /= 255.0
-    # add a dimension so that we have one sample
-    image1 = expand_dims(image1, 0)
-    return image1, width, height
- 
-input_w, input_h = 300, 300
-# define our new photo
-photo_filename = 'Bow_shock.png'
-# load and prepare image
-image1, image_w, image_h = load_image_pixels(photo_filename, (input_w, input_h))
+import numpy as np
+
+#GLOBAL VARIABLES
+path_t = '/home/ubuntu/Training_data'
+path_v = '/home/ubuntu/BowShocks/Validation_data'
+
+EPOCH_NUMBER = 100
+BATCH_SIZE = 64
+LEARNING_RATE = 0.0005 # its 0.01 by default if we just specify 'adam'.
+
+#We build the dataset.
+datagen = keras.preprocessing.image.ImageDataGenerator()
+train_set = datagen.flow_from_directory(path_t, class_mode = 'binary', batch_size = BATCH_SIZE)
+validation_set = datagen.flow_from_directory(path_v, class_mode = 'binary', batch_size = BATCH_SIZE)
 
 #load model#
-model = load_model('model_1.h5')
-yhat = model.predict(image1)
+json_file = open('/home/ubuntu/BowShocks/model.json','r')
+loaded_model_json = json_file.read()
+json_file.close()
+loaded_model = tf.keras.models.model_from_json(loaded_model_json)
+loaded_model.load_weights("/home/ubuntu/BowShocks/model_1.h5")
+optimizer =keras.optimizers.Adam(learning_rate = 0.0005, beta_1 = 0.9, beta_2 = 0.999, amsgrad=False)
+loaded_model.compile(optimizer = optimizer,loss=keras.losses.binary_crossentropy, metrics=['accuracy'])
+score = loaded_model.evaluate_generator(validation_set)
+print(score)
+
